@@ -11,9 +11,9 @@
              vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       
       <a-assets>
-        <img id="mask1" src="/mask1.png">
-        <img id="mask2" src="/mask2.png">
-        <img id="mask3" src="/mask3.png">
+        <img id="mask1" src="/SIC6-11-10/mask1.png">
+        <img id="mask2" src="/SIC6-11-10/mask2.png">
+        <img id="mask3" src="/SIC6-11-10/mask3.png">
       </a-assets>
 
       <a-camera active="false" position="0 0 0"></a-camera>
@@ -30,14 +30,17 @@
       const mindarScene = document.querySelector("a-scene");
 
       mindarScene.addEventListener("targetLost", () => {
-        // 人脸暂时消失
-      });
 
+      });
+      scene.addEventListener("arReady", () => {
+        scene.renderer.render(scene.object3D, scene.camera);
+      });
       mindarScene.addEventListener("targetFound", () => {
-        // 人脸重新出现时切换面具
+
         maskIndex = (maskIndex + 1) % masks.length;
         maskPlane.setAttribute("src", masks[maskIndex]);
       });
     </script>
   </body>
 </html>
+
